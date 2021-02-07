@@ -1,0 +1,12 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": "3000",
+    "database": "recipe-preparation",
+    "username": "root",
+    "password": "",
+    "synchronize": true,
+    "entities": [
+        "src/repository/entity/**/*.ts"
+    ]
+}
