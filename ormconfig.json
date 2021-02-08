@@ -1,7 +1,7 @@
 {
     "type": "mysql",
     "host": "localhost",
-    "port": "3000",
+    "port": "3306",
     "database": "recipe-preparation",
     "username": "root",
     "password": "",
