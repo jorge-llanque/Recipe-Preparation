@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "./Category";
+import { User } from "./User";
 
 @Entity()
 export class Recipe {
@@ -14,6 +16,9 @@ export class Recipe {
     @Column({type: "text"})
     ingredients: string;
 
-    @Column()
-    category: string
+    @ManyToOne(type => User, user => user.recipes)
+    user: User;
+
+    @ManyToOne(type => Category, category => category.recipes)
+    category: Category;
 }

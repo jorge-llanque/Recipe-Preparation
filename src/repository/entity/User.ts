@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Recipe } from "./Recipe";
 
 @Entity()
 export class User {
@@ -11,6 +12,9 @@ export class User {
     @Column({type: "varchar", length:"100"})
     email: string;
 
-    @Column({type: "varchar", length:"100"})
+    @Column({type: "varchar"})
     password: string;
+
+    @OneToMany(type => Recipe, recipe => recipe.user)
+    recipes: Recipe[]
 }

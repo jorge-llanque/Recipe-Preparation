@@ -2,6 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import 'reflect-metadata';
 import { createConnection } from "typeorm";
+import apiRoutes from "./routes";
+
 
 export default () => {
     //create app
@@ -13,6 +15,7 @@ export default () => {
     createConnection();
     
     // set api routes
+    apiRoutes(app);
     
     return app
 }
