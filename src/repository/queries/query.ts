@@ -20,10 +20,16 @@ export const getListData = async (table: string) => {
 }
 
 
-export const getOneData = async (table: string, id: string) => {
+export const getOneData = async (table: string, id?: string, data?: string) => {
     try {
         const entityManager = getManager();
-        return await entityManager.findOne(table, id);
+        if(data){
+            
+            return await entityManager.findOne(table, {where: { name: data}})
+
+        }else{
+            return await entityManager.findOne(table, id)
+        }
 
     } catch (error) {
         return error
