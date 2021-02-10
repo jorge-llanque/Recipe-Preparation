@@ -1,38 +1,40 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import { createUser } from "../../core/services/userService";
 import '../../utils/auth/basic';
+import config from "../../config";
+import boom from "@hapi/boom";
 
 const router = express.Router();
 
-router.post('/sign-in', (req: Request, res: Response) => {
+router.post('/sign-in', (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('basic', (error, user) => {
         try {
             if(error || !user){
-                // not implemented
+                next(boom.unauthorized());
             }
             req.login(user, {session: false}, async (error) => {
                 if(error){
-                    // not implemented
+                    next(error);
                 }
-                
+
                 const payload = {sub: user.id, username: user.name};
-                const token = jwt.sign(payload, "secret", {
-                    expiresIn: "15m"
+                const token = jwt.sign(payload, config.jwt.secretkey, {
+                    expiresIn: "12h"
                 });
                 return res.status(200).json({
                     "access_token": token
                 });
             });
 
-        } catch (error) {
-            // not implemented
+        } catch (error: any) {
+            next(error);
         }
     })(req, res);
 })
 
-router.post('/sign-up', (req: Request, res: Response) => {
+router.post('/sign-up', (req: Request, res: Response, next: NextFunction) => {
     const {name, email, password} = req.body;
 
     createUser(name, email, password).then( (userRegistered: object) => {
@@ -40,6 +42,8 @@ router.post('/sign-up', (req: Request, res: Response) => {
             "message": "User registered",
             "data": userRegistered
         })
+    }).catch((error: Error) => {
+        next(error);
     })
 })
 

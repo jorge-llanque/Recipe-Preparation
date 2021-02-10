@@ -10,9 +10,10 @@ export const createCategory = async (name: string): Promise<any> => {
     }
 }
 
-export const listAllCategory = async (): Promise<any> => {
+export const listAllCategory = async (pagination: any): Promise<any> => {
     try {
-        return await getListData(entity);
+        const {skip, limit} = pagination;
+        return await getListData(entity, undefined, skip, limit);
     } catch (error) {
         return error
     }

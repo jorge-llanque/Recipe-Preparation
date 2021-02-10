@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import decode from "../../utils/auth/decodeHeader";
 
 
 const crypt = (data: string) => {
@@ -17,3 +18,16 @@ export const designUser = (name: string, email: string, password: string) => {
     }
 }
 
+export const designRecipe = (data: any) => {
+
+    const {name, description, recipe, category, ingredients, authorization} = data;
+    const {sub}: any = decode(authorization);
+    return {
+        name,
+        description,
+        recipe,
+        ingredients,
+        category,
+        user: sub
+    }
+}
