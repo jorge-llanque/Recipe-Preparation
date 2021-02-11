@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { createRecipe, getOneRecipe, listAllRecipe, updateRecipe, removeRecipe } from "../../core/services/recipeService";
+import { recipeService } from "../../core/services";
 import auth from "../../utils/middlewares/authentication";
 
 const router = express.Router();
@@ -12,7 +12,7 @@ router.post('/', auth, (req: Request, res: Response, next: NextFunction) => {
         category: req.body.category,
         authorization: req.headers.authorization
     }
-    createRecipe(data).then((list: object) => {
+    recipeService.createRecipe(data).then((list: object) => {
         res.status(201).json({
             "message": "Recipe added",
             "data": list
@@ -27,7 +27,7 @@ router.get('/:skip/:limit', (req: Request, res: Response, next: NextFunction) =>
         skip: req.params.skip,
         limit: req.params.limit
     }
-    listAllRecipe(pagination).then((list: []) => {
+    recipeService.listAllRecipe(pagination).then((list: []) => {
         res.status(200).json({
             "message": "Recipes listed",
             "data": list
@@ -43,7 +43,7 @@ router.get('/myrecipes/:skip/:limit', auth, (req: Request, res: Response, next: 
         skip: req.params.skip,
         limit: req.params.limit
     }
-    listAllRecipe(pagination, authorization).then((list: []) => {
+    recipeService.listAllRecipe(pagination, authorization).then((list: []) => {
         res.status(201).json({
             "message": "Recipes listed",
             "data": list
@@ -55,7 +55,7 @@ router.get('/myrecipes/:skip/:limit', auth, (req: Request, res: Response, next: 
 
 router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     const {id} = req.params;
-    getOneRecipe(id).then((data: object) => {
+    recipeService.getOneRecipe(id).then((data: object) => {
         res.status(200).json({
             "message": "Recipe obteined",
             "data": data
@@ -68,7 +68,7 @@ router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
 router.put('/:id', (req: Request, res: Response, next: NextFunction) => {
     const {id} = req.params;
     const data = req.body;
-    updateRecipe(id, data).then((data: object) => {
+    recipeService.updateRecipe(id, data).then((data: object) => {
         res.status(200).json({
             "message": "Data updated",
             "data": data
@@ -81,7 +81,7 @@ router.put('/:id', (req: Request, res: Response, next: NextFunction) => {
 router.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
     const {id} = req.params;
 
-    removeRecipe(id).then(() => {
+    recipeService.removeRecipe(id).then(() => {
         res.status(200).json({
             "message": "data removed"
         })

@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import { createUser } from "../../core/services/userService";
+import { userService } from "../../core/services/";
 import '../../utils/auth/basic';
 import config from "../../config";
 import boom from "@hapi/boom";
@@ -37,7 +37,7 @@ router.post('/sign-in', (req: Request, res: Response, next: NextFunction) => {
 router.post('/sign-up', (req: Request, res: Response, next: NextFunction) => {
     const {name, email, password} = req.body;
 
-    createUser(name, email, password).then( (userRegistered: object) => {
+    userService.createUser(name, email, password).then( (userRegistered: object) => {
         res.status(201).json({
             "message": "User registered",
             "data": userRegistered

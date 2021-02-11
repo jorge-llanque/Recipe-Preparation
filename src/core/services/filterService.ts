@@ -2,7 +2,7 @@ import { getCategoryFiltered, getFilterRecipe } from "../../repository/queries/q
 
 
 
-export const filterService = async (data: any): Promise<any> => {
+export const filterData = async (data: any): Promise<any> => {
     try {
                 if(data.category){
                     return await getCategoryFiltered('Category', data.category);

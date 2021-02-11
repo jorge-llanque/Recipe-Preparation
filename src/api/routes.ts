@@ -1,12 +1,8 @@
-import recipeController from "./controllers/recipeController";
-import authController from "./controllers/authController";
-import categoryController from "./controllers/categoryController";
-import filterController from "./controllers/filterController";
-
+import * as Controller from './controllers';
 
 export default (server: any) => {
-    server.use('/api', authController)
-    server.use('/api/category', categoryController)
-    server.use('/api/recipe', recipeController)
-    server.use('/api/filter', filterController)
+    server.use('/api', Controller.authCtrl)
+    server.use('/api/category', Controller.categoryCtrl)
+    server.use('/api/recipe', Controller.recipeCtrl)
+    server.use('/api/filter', Controller.filterCtrl)
 }
