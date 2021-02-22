@@ -23,7 +23,7 @@ router.get('/:skip/:limit', auth, (req: Request, res: Response, next: NextFuncti
     }
     categoryService.listAllCategory(pagination).then((list: []) => {
         res.status(200).json({
-            "message": "list Categories",
+            "message": "List categories",
             "data": list
         })
     }).catch((error: Error) => {
@@ -35,7 +35,7 @@ router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     const {id}  = req.params
     categoryService.getOneCategory(id).then((data: object) => {
         res.status(200).json({
-            "message": "one category",
+            "message": "One category",
             "data": data
         })
     }).catch((error: Error) => {
@@ -60,7 +60,7 @@ router.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
     const {id} = req.params;
     categoryService.removeCategory(id).then(() => {
         res.status(200).json({
-            "message": "data removed"
+            "message": "Category removed"
         })
     }).catch((error: Error) => {
         next(error);

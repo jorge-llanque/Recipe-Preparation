@@ -8,7 +8,7 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
     const filterRequest = req.body;
     filterService.filterData(filterRequest).then((list: any) => {
         res.status(200).json({
-            message: "filtered",
+            message: "Filtered",
             "data": list
         })
     }).catch((error: Error) => {

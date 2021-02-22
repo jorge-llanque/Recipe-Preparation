@@ -83,7 +83,7 @@ router.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
 
     recipeService.removeRecipe(id).then(() => {
         res.status(200).json({
-            "message": "data removed"
+            "message": "Recipe removed"
         })
     }).catch((error: Error) => {
         next(error);

@@ -19,7 +19,6 @@ export const designUser = (name: string, email: string, password: string) => {
 }
 
 export const designRecipe = (data: any) => {
-
     const {name, description, recipe, category, ingredients, authorization} = data;
     const {sub}: any = decode(authorization);
     return {

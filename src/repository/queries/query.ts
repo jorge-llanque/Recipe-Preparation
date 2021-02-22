@@ -24,7 +24,6 @@ export const getListData = async (table: string, id?: string, skip: number = 0, 
     }
 }
 
-
 export const getOneData = async (table: string, id?: string, data?: string) => {
     try {
         const entityManager = getManager();
