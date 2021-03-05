@@ -2,7 +2,6 @@ Technologies Used
 - Typescript
 - Typeorm
 - MySql
-- 
 
 For Documentation
 - Swagger
